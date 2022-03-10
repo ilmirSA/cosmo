@@ -7,12 +7,10 @@ from dotenv import load_dotenv
 def main():
     load_dotenv()
     token = os.getenv("TELEGRAM_TOKEN")
-
+    chat_id = os.getenv("CHAT_ID")
     bot = telegram.Bot(token=token)
-
     updates = bot.get_updates()
-    #print(updates[0])
-    bot.send_message(text='Привет пользователи!', chat_id=-1001783746663)
+    bot.send_photo(chat_id=chat_id, photo=open('image/earth_3.png', 'rb'))
 
 
 if __name__ == "__main__":
