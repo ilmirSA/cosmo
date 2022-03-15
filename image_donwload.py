@@ -26,6 +26,7 @@ def define_extension(url):
 
 # скачивает фотографии Nasa
 def nasa_image_download(token, path):
+    path_check(path)
     url = "https://api.nasa.gov/planetary/apod"
 
     payload = {"api_key": token, "count": 50}
@@ -47,6 +48,7 @@ def nasa_image_download(token, path):
 
 # скачивает фотографии spaceX
 def fetch_spacex_last_launch(path):
+    path_check(path)
     url = "https://api.spacexdata.com/v3/launches/"
     response = requests.get(url)
     response.raise_for_status()
@@ -63,6 +65,7 @@ def fetch_spacex_last_launch(path):
 
 # скачивает фотографии нашей земли от Nasa
 def earth_photo(token, path):
+    path_check(path)
     url = "https://api.nasa.gov/EPIC/api/natural"
 
     payload = {"api_key": token}
@@ -86,10 +89,13 @@ def main():
     load_dotenv()
     token = os.getenv("NASA_TOKEN")
 
-    path = "image/"
-    nasa_image_download(token, path)
-    fetch_spacex_last_launch(path)
-    earth_photo(token, path)
+    path_nasa = "image/nasa/"
+    path_spacex = "image/spacex/"
+    path_earth = "image/earth/"
+
+    nasa_image_download(token, path_nasa)
+    fetch_spacex_last_launch(path_spacex)
+    earth_photo(token, path_earth)
 
 
 if __name__ == "__main__":
