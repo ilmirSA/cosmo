@@ -9,13 +9,10 @@ from dotenv import load_dotenv
 def main():
     load_dotenv()
     token = os.getenv("TELEGRAM_TOKEN")
-
+    chat_id = os.getenv("CHAT_ID")
     t = int(os.getenv("TIME"))
 
     bot = telegram.Bot(token=token)
-    updates = bot.get_updates()
-    chat_id = updates[0]["channel_post"]["chat"]["id"]
-
 
     path_f = []
 
@@ -26,7 +23,7 @@ def main():
 
     while True:
         for fi in random.choices(path_f, k=1):
-            bot.send_photo(chat_id=chat_id, photo=open(fi, 'rb'))
+            bot.send_photo(chat_id=chat_id, photo=open(fi, "rb"))
         time.sleep(t)
 
 
