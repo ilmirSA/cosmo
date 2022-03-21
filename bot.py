@@ -10,21 +10,23 @@ def main():
     load_dotenv()
     token = os.getenv("TELEGRAM_TOKEN")
     chat_id = os.getenv("CHAT_ID")
-    t = int(os.getenv("TIME"))
+    seconds_of_time = int(os.getenv("TIME"))
 
     bot = telegram.Bot(token=token)
 
-    path_f = []
+    full_paths_to_images = []
 
-    for d, dirs, files in os.walk("image"):
-        for f in files:
-            path = os.path.join(d, f)
-            path_f.append(path)
+    for pathdirs, dirs, filename in os.walk("image"):
+
+        for img in filename:
+            path = os.path.join(pathdirs, img)
+            full_paths_to_images.append(path)
 
     while True:
-        for fi in random.choices(path_f, k=1):
-            bot.send_photo(chat_id=chat_id, photo=open(fi, "rb"))
-        time.sleep(t)
+        for image in random.choices(full_paths_to_images, k=1):
+            with open(image,"rb") as img:
+                bot.send_photo(chat_id=chat_id, photo=img)
+        time.sleep(seconds_of_time)
 
 
 if __name__ == "__main__":
