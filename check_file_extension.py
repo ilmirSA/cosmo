@@ -11,4 +11,10 @@ def define_extension(url):
 
     if extension[1].endswith(("jpg", "jpeg", "png", "gif")):
         return extension[1]
+    else:
+        False
 
+
+# u = "https://www.youtube.com/embed/tvB0mdkrG3Q?rel=0"
+# i = 'https://apod.nasa.gov/apod/image/9909/moon3_cassini.jpg'
+# print(define_extension(u))
