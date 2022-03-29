@@ -18,6 +18,7 @@ def ftech_eath_photo(token, url, path):
 
         download_image_url = f"https://api.nasa.gov/EPIC/archive/natural/{image_date}/png/{image_name}.png"
 
+
         download_image = requests.get(download_image_url, params=payload)
         download_image.raise_for_status()
 
